@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Context\" />
     <Folder Include="ViewModell\" />
-    <Folder Include="Modell\" />
   </ItemGroup>
 
   <ItemGroup>
