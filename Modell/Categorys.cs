@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace ShopContent_Markov.Modell
 {
-    public class Categorys : INotifyPropertyChanging
+    public class Categorys : INotifyPropertyChanged
     {
         private int id;
         public int Id { 

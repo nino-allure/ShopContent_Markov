@@ -97,7 +97,7 @@ namespace ShopContent_Markov.Context
             {
                 return new RelayCommand(obj => 
                 {
-                    MainWindow.init.frame.Navigate(new View.Add(this));
+                    MainWindow.init.frame.Navigate(new ViewModell.Add(this));
                 });
             }
 }
@@ -121,7 +121,7 @@ namespace ShopContent_Markov.Context
                 return new RelayCommand(obj => 
                 {
                     Delete(); 
-                    (MainWindow.init.Main.DataContext as View.VMItems).Items.Remove(this);
+                    (MainWindow.init.Main.DataContext as ViewModell.VMItems).Items.Remove(this);
                 });
             }
         }
