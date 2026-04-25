@@ -9,7 +9,7 @@ namespace ShopContent_Markov.Classes
 {
     public class Connection
     {
-        private readonly string config = "server=localhost;" + "Trusted_Connection=No;" + "DataBase=ShopContent;" + "User=root;" + "PWD=;";
+        private static readonly string config = "server=10.0.201.112;" + "Trusted_Connection=No;" + "DataBase=ShopContent;" + "User=ISP_23_2_13;" + "PWD=;";
         public static SqlConnection OpenConnection()
         {
             SqlConnection connection = new SqlConnection(config);
@@ -24,7 +24,7 @@ namespace ShopContent_Markov.Classes
         public static void CloseConnection(SqlConnection connection)
         {
             connection.Close();
-            SqlCommand.ClearPool(connection);
+            SqlConnection.ClearPool(connection);
         }
     }
 }

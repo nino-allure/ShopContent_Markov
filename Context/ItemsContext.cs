@@ -97,7 +97,7 @@ namespace ShopContent_Markov.Context
             {
                 return new RelayCommand(obj => 
                 {
-                    MainWindow.init.frame.Navigate(new ViewModell.Add(this));
+                    MainWindow.init.frame.Navigate(new View.Add(this));
                 });
             }
 }
