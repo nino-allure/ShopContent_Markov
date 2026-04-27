@@ -2,7 +2,7 @@
 using ShopContent_Markov.View.Items;
 using ShopContent_Markov;
 using System.Collections.ObjectModel;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Linq;
 using System.Windows.Controls.Primitives;
 using ShopContent_Markov.Modell;
@@ -22,9 +22,9 @@ namespace ShopContent_Markov.Context
             
             ObservableCollection<CategorysContext> allCategorys = CategorysContext.AllCategorys();
             
-            SqlConnection connection;
+            MySqlConnection connection;
             
-            SqlDataReader dataItems = Connection.Query("SELECT * FROM [dbo].[Items]", out connection);
+            MySqlDataReader dataItems = Connection.Query("SELECT * FROM Items", out connection);
             
             while (dataItems.Read())
             {
@@ -46,37 +46,32 @@ namespace ShopContent_Markov.Context
             return allItems;
         }
 
-        
+
         public void Save(bool New = false)
         {
-            SqlConnection connection;
+            MySqlConnection connection;
+
+            string price = this.Price.ToString().Replace(",", ".");
+
             if (New)
             {
-                SqlDataReader dataItems = Connection.Query("INSERT INTO " +
-                    "[dbo].[Items] (" +
-                        "[Name], " +
-                        "[Price], " +
-                        "[Description] " +
-                    ")" +
-                    "OUTPUT inserted.Id " +
-                    "VALUES (" +
-                        $"N'{this.Name}', " +
-                        $"{this.Price}, " +
-                        $"N'{this.Description}' " +
-                    ")", out connection);
+                string sql = "INSERT INTO Items (Name, Price, Description) " +
+                             $"VALUES ('{this.Name}', {price}, '{this.Description}'); " +
+                             "SELECT LAST_INSERT_ID();";
+
+                MySqlDataReader dataItems = Connection.Query(sql, out connection);
                 dataItems.Read();
                 this.Id = dataItems.GetInt32(0);
             }
             else
             {
-                Connection.Query("UPDATE [dbo].[Items] " +
-                    "SET " +
-                        $"[Name] = N'{this.Name}', " +
-                        $"[Price] = {this.Price}, " +
-                        $"[Description] = N'{this.Description}', " +
-                        $"[IdCategory] = {this.Category.Id} " +
-                    "WHERE " +
-                        $"[Id] = {this.Id}", out connection);
+                string sql = "UPDATE Items SET " +
+                            $"Name = '{this.Name}', " +
+                            $"Price = {price}, " +
+                            $"Description = '{this.Description}', " +
+                            $"IdCategory = {this.Category.Id} " +
+                            $"WHERE Id = {this.Id}";
+                Connection.Query(sql, out connection);
             }
             Connection.CloseConnection(connection);
             MainWindow.init.frame.Navigate(MainWindow.init.Main);
@@ -84,10 +79,10 @@ namespace ShopContent_Markov.Context
 
         public void Delete()
         {
-            SqlConnection connection;
-            Connection.Query("DELETE FROM [dbo].[Items] " +
+            MySqlConnection connection;
+            Connection.Query("DELETE FROM Items " +
                 "WHERE " +
-                    $"[Id] = {this.Id}", out connection);
+                    $"Id = {this.Id}", out connection);
             Connection.CloseConnection(connection);
         }
 

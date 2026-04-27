@@ -1,13 +1,12 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using ShopContent_Markov.Classes;
+using ShopContent_Markov.Modell;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ShopContent_Markov.Modell;
-using ShopContent_Markov.Classes;
-
-using System.Data.SqlClient;
 
 namespace ShopContent_Markov.Context
 {
@@ -16,8 +15,8 @@ namespace ShopContent_Markov.Context
         public static ObservableCollection<CategorysContext> AllCategorys()
         {
             ObservableCollection<CategorysContext> allCategorys = new ObservableCollection<CategorysContext>();
-            SqlConnection connection;
-            SqlDataReader dataCategorys = Connection.Query("SELECT * FROM [dbo].[Categorys]", out connection);
+            MySqlConnection connection;
+            MySqlDataReader dataCategorys = Connection.Query("SELECT * FROM Categorys", out connection);
             while (dataCategorys.Read())
             {
                 allCategorys.Add(new CategorysContext()

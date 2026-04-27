@@ -10,8 +10,8 @@
       Title="Main" FontFamily="Centry Gothic">
     <Page.Resources>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#FF4FC318"/>
-            <Setter Property="BorderBrush" Value="#FF4FC318"/>
+            <Setter Property="Background" Value="LimeGreen"/>
+            <Setter Property="BorderBrush" Value="LimeGreen"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>

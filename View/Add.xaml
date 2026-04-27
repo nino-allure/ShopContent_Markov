@@ -9,8 +9,8 @@
       Title="Add" Margin="10" FontFamily="Centry Gothic">
     <Page.Resources>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#FF4FC318"/>
-            <Setter Property="BorderBrush" Value="#FF4FC318"/>
+            <Setter Property="Background" Value="LimeGreen"/>
+            <Setter Property="BorderBrush" Value="LimeGreen"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
     </Page.Resources>
@@ -26,18 +26,18 @@
             </Grid.ColumnDefinitions>
             <Label Content="Наименование" VerticalAlignment="Top" Margin="10,10,10,0"/>
             <TextBox Text="{Binding item.Name}" Height="25" VerticalAlignment="Top" Margin="10,36,10,0"
-             VerticalContentAlignment="Center" IsEnabled="False"/>
+             VerticalContentAlignment="Center"/>
             <Label Content="Стоимость" VerticalAlignment="Top" Margin="10,10,10,0" Grid.Column="1"/>
             <TextBox Text="{Binding item.Price}" Height="25" VerticalAlignment="Top" Margin="10,36,10,0"
-            VerticalContentAlignment="Center" IsEnabled="False" Grid.Column="1"/>
+            VerticalContentAlignment="Center" Grid.Column="1"/>
             <Label Content="Категория" VerticalAlignment="Top" Margin="10,67,10,0" Grid.ColumnSpan="2"/>
             <ComboBox x:Name="cbCategory" ItemsSource="{Binding categorys.Categorys}" DisplayMemberPath="Name" 
                       SelectedValue="{Binding item.Category.Id}" SelectedValuePath="Id"
                       Text="{Binding item.Category.Name}" Height="25" VerticalAlignment="Top" Margin="10,93,10,0"
-            VerticalContentAlignment="Center" IsEnabled="False" Grid.ColumnSpan="2"/>
+            VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
             <Label Content="Описание" VerticalAlignment="Top" Margin="10,123,10,0" Grid.ColumnSpan="2"/>
             <TextBox Text="{Binding item.Description}" Height="25" VerticalAlignment="Top" Margin="10,150,10,10"
-            VerticalContentAlignment="Center" IsEnabled="False" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
+            VerticalContentAlignment="Center" Grid.ColumnSpan="2" TextWrapping="Wrap"/>
             <Button Content="Сохранить" Width="100" Height="25" Margin="0,0,10,10" VerticalAlignment="Bottom"
                     HorizontalAlignment="Right" Grid.Column="1" Command="{Binding item.OnSave}">
                 <Button.Effect>

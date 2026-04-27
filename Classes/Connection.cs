@@ -1,30 +1,32 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 
 namespace ShopContent_Markov.Classes
 {
     public class Connection
     {
-        private static readonly string config = "server=10.0.201.112;" + "Trusted_Connection=No;" + "DataBase=ShopContent;" + "User=ISP_23_2_13;" + "PWD=;";
-        public static SqlConnection OpenConnection()
+        private static readonly string config = "server=localhost;port=3306;database=ShopContent;user=root;password=;";
+
+        public static MySqlConnection OpenConnection()
         {
-            SqlConnection connection = new SqlConnection(config);
+            MySqlConnection connection = new MySqlConnection(config);
             connection.Open();
             return connection;
         }
-        public static SqlDataReader Query(string SQL, out SqlConnection connection)
+
+        public static MySqlDataReader Query(string SQL, out MySqlConnection connection)
         {
             connection = OpenConnection();
-            return new SqlCommand(SQL, connection).ExecuteReader();
+            return new MySqlCommand(SQL, connection).ExecuteReader();
         }
-        public static void CloseConnection(SqlConnection connection)
+
+        public static void CloseConnection(MySqlConnection connection)
         {
             connection.Close();
-            SqlConnection.ClearPool(connection);
         }
     }
 }
